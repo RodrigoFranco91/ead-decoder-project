@@ -16,12 +16,12 @@ import java.util.UUID;
 @Repository
 public interface ModuleRepository extends JpaRepository<ModuleModel, UUID>, JpaSpecificationExecutor<ModuleModel> {
 
-//    @EntityGraph(attributePaths = {"course"}) //couse é o atributo da classe ModuleModel que faz o relacionamento.
+//    @EntityGraph(attributePaths = {"course"}) //course é o atributo da classe ModuleModel que faz o relacionamento.
 //    ModuleModel findByTitle(String title);
 
-    @Query(value = "SELECT * FROM tb_modules WHERE course_course_id = :courseId", nativeQuery = true)
-    List<ModuleModel> findAllModulesIntoCourse(@Param("courseId") UUID courseId);
+    @Query(value="select * from tb_modules where course_course_id = :courseId", nativeQuery = true)
+    List<ModuleModel> findAllLModulesIntoCourse(@Param("courseId") UUID courseId);
 
-    @Query(value = "SELECT * FROM tb_modules WHERE course_course_id = :courseId AND module_id = :moduleId", nativeQuery = true)
+    @Query(value = "select * from tb_modules where course_course_id = :courseId and module_id = :moduleId", nativeQuery = true)
     Optional<ModuleModel> findModuleIntoCourse(@Param("courseId")UUID courseId, @Param("moduleId") UUID moduleId);
 }
